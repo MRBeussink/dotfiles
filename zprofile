@@ -6,7 +6,7 @@ export TERMINAL="iTerm2"
 export BROWSER="brave"
 
 # clean up ~
-export ZDOTDIR="$HOME/.config/zsh"
+# export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
 #mkcd () {
 	#mkdir -p -- "$1" &&
