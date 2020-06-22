@@ -3,15 +3,12 @@
 # Default programs
 export EDITOR="nvim"
 export TERMINAL="iTerm2"
-export BROWSER="brave"
 
 # clean up ~
 # export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
-#mkcd () {
-	#mkdir -p -- "$1" &&
-	#  cd -P -- "$1"
-#}
+alias vi=nvim
+alias vim=nvim
 
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"

@@ -5,9 +5,23 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall
 endif
 
+
 call plug#begin('~/.config/nvim/plugged')
+Plug 'arcticicestudio/nord-vim'
+
+Plug 'scrooloose/syntastic'
+
+Plug 'rust-lang/rust.vim'
 Plug 'keith/swift.vim'
+
 call plug#end()
+
+
+colorscheme nord
+
+set number relativenumber
+set nu rnu
+
 
 " Reloads vimrc after saving but keep cursor position
 if !exists('*ReloadVimrc')
