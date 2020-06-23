@@ -16,3 +16,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 #export NVM_DIR=~/dev/.nvm
 source $(brew --prefix nvm)/nvm.sh
+
+# Local config
+[[ -f ~/.zprofile.local ]] && source ~/.zprofile.local
+
