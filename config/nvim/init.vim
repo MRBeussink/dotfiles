@@ -5,7 +5,6 @@ if ! filereadable(expand('~/.config/nvim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall
 endif
 
-
 call plug#begin('~/.config/nvim/plugged')
 Plug 'arcticicestudio/nord-vim'
 
