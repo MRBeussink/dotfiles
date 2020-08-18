@@ -21,6 +21,10 @@ colorscheme nord
 set number relativenumber
 set nu rnu
 
+autocmd Filetype js setlocal tabstop=2
+autocmd Filetype ts setlocal tabstop=2
+autocmd Filetype jsx setlocal tabstop=2
+autocmd Filetype json setlocal tabstop=2
 
 " Reloads vimrc after saving but keep cursor position
 if !exists('*ReloadVimrc')
