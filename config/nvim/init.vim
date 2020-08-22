@@ -8,6 +8,7 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'MRBeussink/nord-vim' "use personal fork for customization
 " Plug 'arcticicestudio/nord-vim'
+Plug 'junegunn/vim-emoji'
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -39,6 +40,9 @@ set cursorline
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
+
+" Emoji completion
+set completefunc=emoji#complete
 
 " Enable hidden buffers
 set hidden
