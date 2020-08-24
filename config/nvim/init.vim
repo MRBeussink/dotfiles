@@ -16,10 +16,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
 Plug 'yggdroot/indentline'
-Plug 'scrooloose/syntastic' " needed by swift.vim for syntax highlighting
-Plug 'rust-lang/rust.vim'
-Plug 'keith/swift.vim'
-Plug 'jelera/vim-javascript-syntax'
+
+Plug 'sheerun/vim-polyglot'
 
 if isdirectory('/usr/local/opt/fzf')
 	Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -46,14 +44,14 @@ set hidden
 " Fix backspace indent
 set backspace=indent,eol,start
 
+set tabstop=2
+set softtabstop=0
+set shiftwidth=2
+set expandtab
 " autocmd Filetype js setlocal tabstop=2
 " autocmd Filetype ts setlocal tabstop=2
 " autocmd Filetype jsx setlocal tabstop=2
 " autocmd Filetype json setlocal tabstop=2
-set tabstop=4
-set softtabstop=0
-set shiftwidth=4
-set expandtab
 
 
 " Search mappings: These will make it so that going to the next one in a
@@ -102,13 +100,15 @@ endif
 " IndentLine
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
-let g:indentLine_char = '⎸'
+" let g:indentLine_char = '⎸'
+let g:indentLine_char = '┆'
+" let g:indentLine_char_list = ['⎸', '¦', '┆', '¦', '┆''¦', '┆']
 let g:indentLine_faster = 1
 
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
 
-" Neat, but with thoughbot's rcm is moot
+" Neat, but with thoughbot's rcm it is moot
 " Reloads vimrc after saving but keep cursor position
 " if !exists('*ReloadVimrc')
 "    fun! ReloadVimrc()
