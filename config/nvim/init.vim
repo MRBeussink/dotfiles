@@ -7,20 +7,16 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'MRBeussink/nord-vim' "use personal fork for customization
-" Plug 'arcticicestudio/nord-vim'
+Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/vim-emoji'
-
-Plug 'tpope/vim-surround'
+Plug 'neoclide/coc.nvim', {'branch': 'release' }
 Plug 'tpope/vim-commentary'
 " Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
-
 Plug 'yggdroot/indentline'
-Plug 'airblade/vim-gitgutter'
-
 Plug 'scrooloose/syntastic' " needed by swift.vim for syntax highlighting
-
 Plug 'rust-lang/rust.vim'
 Plug 'keith/swift.vim'
 Plug 'jelera/vim-javascript-syntax'
@@ -86,9 +82,6 @@ if has('macunix')
   vmap <C-c> :w !pbcopy<CR><CR>
 endif
 
-" vim-repeat
-" silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
-
 set splitbelow
 set splitright
 
@@ -106,13 +99,14 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-
 " IndentLine
 let g:indentLine_enabled = 1
 let g:indentLine_concealcursor = 0
 let g:indentLine_char = '⎸'
 let g:indentLine_faster = 1
 
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
 
 " Neat, but with thoughbot's rcm is moot
 " Reloads vimrc after saving but keep cursor position
