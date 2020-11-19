@@ -1,4 +1,3 @@
-
 " install LSPs
 lua << END
   require'nvim_lsp'.tsserver.setup{}

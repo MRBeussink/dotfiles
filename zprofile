@@ -7,8 +7,17 @@ export TERMINAL="iTerm2"
 # clean up ~
 # export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 
-alias vi=nvim
-alias vim=nvim
+# if command nvim
+# then
+#   alias vi="nvim"
+#   alias vim="nvim"
+#   alias v="nvim"
+# fi
+
+# if command trash
+# then  
+#   alias rm="trash"
+# fi
 
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"

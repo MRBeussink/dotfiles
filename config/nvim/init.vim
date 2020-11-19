@@ -5,6 +5,8 @@ source ~/.config/nvim/lsp-config.vim
 "" general
 "*****************************************************************************
 set autoread
+set mouse=a
+syntax on
 " relative line numbers with current line shown as absolute number
 set number relativenumber
 set nu rnu
@@ -34,6 +36,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
 
 " line wrapping
 set wrap linebreak nolist
@@ -48,17 +52,15 @@ nmap <D-4> g$
 nmap <D-6> g^
 nmap <D-0> g^
 
-"" Copy/Paste/Cut
+" Copy/Paste/Cut
 noremap YY "+y<CR>
 noremap <leader>p "+gP<CR>
 noremap XX "+x<CR>
 
-set splitbelow
-set splitright
-
 "*****************************************************************************
 "" appearance
 "*****************************************************************************
-colorscheme nord
 syntax on
 set cursorline
+set termguicolors
+set signcolumn=yes

@@ -12,6 +12,12 @@ Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
+" Plug 'dense-analysis/ale'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/deoplete-lsp'
+
+" javascript
+Plug 'prettier/vim-prettier'
 
 " appearance
 Plug 'arcticicestudio/nord-vim'
@@ -27,6 +33,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'pseewald/vim-anyfold'
 if isdirectory('/usr/local/opt/fzf')
 	Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 endif
@@ -38,12 +45,11 @@ call plug#end()
 " Plug 'voldikss/vim-floaterm' " appears to have good integration with lf and
 " other terminal file browsers
 
-Plug 'sheerun/vim-polyglot'
-
-
 "*****************************************************************************
 "" apperance
 "*****************************************************************************
+
+colorscheme nord
 
 " IndentLine
 let g:indentLine_enabled = 1
@@ -53,10 +59,30 @@ let g:indentLine_char_list = ['⎸', '¦']
 let g:indentLine_faster = 1
 
 "*****************************************************************************
+"" javascript
+"*****************************************************************************
+
+" Set it up so that Prettier runs on save for .js .jsx and .ts files
+" augroup AutomaticPrettier
+"   autocmd!
+"   autocmd BufWritePre,FileWritePre,FileAppendPre *.js :Prettier
+"   autocmd BufWritePre,FileWritePre,FileAppendPre *.jsx :Prettier
+"   autocmd BufWritePre,FileWritePre,FileAppendPre *.ts :Prettier
+" augroup END
+
+"*****************************************************************************
 "" utility
 "*****************************************************************************
 
-"" fzf.vim
+" vim-anyfold
+augroup Anyfold
+  autocmd Filetype * AnyFoldActivate
+augroup END
+autocmd Anyfold Filetype AnyFoldActivate
+set foldlevel=1
+filetype plugin indent on
+
+" fzf.vim
 nnoremap <silent> <C-p> :FZF<CR>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
@@ -69,3 +95,5 @@ endif
 
 "vim-vinegar
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+
+
