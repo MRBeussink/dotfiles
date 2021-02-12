@@ -21,6 +21,7 @@ Plug 'prettier/vim-prettier'
 
 " appearance
 Plug 'arcticicestudio/nord-vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -29,6 +30,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " utility
 Plug 'machakann/vim-sandwich'
+Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
@@ -36,6 +38,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'pseewald/vim-anyfold'
 if isdirectory('/usr/local/opt/fzf')
 	Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+  Plug 'jremmen/vim-ripgrep'
 endif
 call plug#end()
 
@@ -86,12 +89,19 @@ filetype plugin indent on
 nnoremap <silent> <C-p> :FZF<CR>
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let $FZF_DEFAULT_COMMAND =  "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+" Shoutout to this nice blog post:
+" https://www.erickpatrick.net/blog/adding-syntax-highlighting-to-fzf.vim-preview-window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+" let $FZF_DEFAULT_COMMAND = "find * -path '*/\.*' -prune -o -path 'node_modules/**' -prune -o -path 'target/**' -prune -o -path 'dist/**' -prune -o  -type f -print -o -type l -print 2> /dev/null"
+let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules,vendor}/*"'
+command! -bang -nargs=? -complete=dir Files
+     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4 --preview 'bat --color=always --style=header,grid --line-range :300 {}'"
 " fzf - The Silver Searcher
-if executable('ag')
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
+" if executable('ag')
+"   let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+"   set grepprg=ag\ --nogroup\ --nocolor
+" endif
 
 "vim-vinegar
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'

@@ -1,5 +1,5 @@
-source ~/.config/nvim/plugins.vim
-source ~/.config/nvim/lsp-config.vim
+source ./plugins.vim
+source ./lsp-config.vim
 
 "*****************************************************************************
 "" general
@@ -25,6 +25,21 @@ set tabstop=2
 set softtabstop=0
 set shiftwidth=2
 set expandtab
+set smartindent
+
+set nohlsearch
+set incsearch
+
+set scrolloff=8
+
+" allows (n)vim to look for rc files in opened dir
+" good for project specific settings
+set exrc
+
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
 
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
