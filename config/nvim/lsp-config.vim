@@ -1,6 +1,6 @@
 " install LSPs
 lua << END
-  require'nvim_lsp'.tsserver.setup{}
+  require'lspconfig'.tsserver.setup{}
 END
 
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -21,7 +21,7 @@ local on_attach_vim = function(client)
   require'completion'.on_attach(client)
   require'diagnostic'.on_attach(client)
 end
-require'nvim_lsp'.tsserver.setup{on_attach=on_attach_vim}
+require'lspconfig'.tsserver.setup{on_attach=on_attach_vim}
 EOF
 
 let g:diagnostic_enable_virtual_text = 1

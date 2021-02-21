@@ -1,5 +1,5 @@
-source ./plugins.vim
-source ./lsp-config.vim
+source ~/.config/nvim/plugins.vim
+source ~/.config/nvim/lsp-config.vim
 
 "*****************************************************************************
 "" general
@@ -10,6 +10,8 @@ syntax on
 " relative line numbers with current line shown as absolute number
 set number relativenumber
 set nu rnu
+
+let mapleader = " "
 
 " enable hidden buffers
 set hidden
