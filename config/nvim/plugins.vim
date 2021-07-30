@@ -12,24 +12,31 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'neovim/nvim-lsp'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
+" Plug 'nvim-lua/diagnostic-nvim'
 " Plug 'dense-analysis/ale'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete-lsp'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete-lsp'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " javascript
 Plug 'prettier/vim-prettier'
 
 " appearance
-Plug 'arcticicestudio/nord-vim'
+Plug 'arcticicestudio/nord-vim' " there's an unmerged PR for adding treesitter support
+" Plug 'shaunsingh/nord.nvim' " port of nord vim with added support
+" Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " has tree-sitter support for Nord
 Plug 'gruvbox-community/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+" Plug 'hoob3rt/lualine.nvim'
+" Plug 'kyazdani42/nvim-web-devicons'
 
 " utility
+Plug 'mhinz/vim-startify'
 Plug 'machakann/vim-sandwich'
 Plug 'unblevable/quick-scope'
 Plug 'tpope/vim-commentary'
@@ -128,4 +135,46 @@ command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "vim-vinegar
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
-
+" treesitter
+" Enable it all
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "javascript", "typescript", "rust", "json", "lua" },
+  highlight = {
+    enable = true,
+  },
+  refactor = {
+    -- Highlighting definitions doesn't seem to work inside JS the way I'd expect. :thinking:
+    highlight_definitions = { enable = true },
+    -- highlight_current_scope = { enable = true },
+    smart_rename = {
+      enable = true,
+      keymaps = {
+        smart_rename = "<leader>r",
+      },
+    },
+    navigation = {
+      enable = true,
+      keymaps = {
+        goto_definition = "<leader>dd",
+        list_definitions = "<leader>dl",
+        goto_next_usage = "<a-j>",
+        goto_previous_usage = "<a-k>",
+      },
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        -- Not really useful on how we use JS
+        -- ["ac"] = "@class.outer",
+        -- ["ic"] = "@class.inner",
+      },
+    },
+  },
+}
+EOF

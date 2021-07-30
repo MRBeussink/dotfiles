@@ -1,10 +1,12 @@
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/lsp-config.vim
+source ~/.config/nvim/local.vim
 
 "*****************************************************************************
 "" general
 "*****************************************************************************
 set autoread
+:au FocusLost * silent! :wa " enamble auto save on focus lost
 set mouse=a
 syntax on
 " relative line numbers with current line shown as absolute number

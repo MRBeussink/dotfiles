@@ -19,7 +19,6 @@ set completeopt=menuone,noinsert,noselect
 lua << EOF
 local on_attach_vim = function(client)
   require'completion'.on_attach(client)
-  require'diagnostic'.on_attach(client)
 end
 require'lspconfig'.tsserver.setup{on_attach=on_attach_vim}
 EOF
@@ -27,4 +26,4 @@ EOF
 let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_enable_underline = 0
 let g:diagnostic_auto_popup_while_jump = 1
-let g:diagnostic_insert_delay = 1
+let g:diagnostic_insert_delay = 0
