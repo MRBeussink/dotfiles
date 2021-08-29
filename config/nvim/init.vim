@@ -1,10 +1,7 @@
-source ~/.config/nvim/plugins.vim
-source ~/.config/nvim/lsp-config.vim
-source ~/.config/nvim/local.vim
-
 "*****************************************************************************
 "" general
 "*****************************************************************************
+set 
 set autoread
 :au FocusLost * silent! :wa " enamble auto save on focus lost
 set mouse=a
@@ -83,3 +80,12 @@ syntax on
 set cursorline
 set termguicolors
 set signcolumn=yes
+
+
+"*****************************************************************************
+"" sourcing
+"*****************************************************************************
+source ~/.config/nvim/plugins.vim
+source ~/.config/nvim/lsp-config.vim
+source ~/.config/nvim/local.vim
+

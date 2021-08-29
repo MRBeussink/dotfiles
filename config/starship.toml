@@ -1,4 +1,4 @@
-# starship config
+# starship.rs config
 
 add_newline = false
 
@@ -13,4 +13,7 @@ disabled = true
 
 [cmd_duration]
 disabled = true
+
+[nodejs]
+symbol = " "
 
