@@ -21,7 +21,7 @@ Plug 'prettier/vim-prettier'
 
 "appearance
 " Plug 'arcticicestudio/nord-vim' " there's an unmerged PR for adding treesitter support
-Plug 'shaunsingh/nord.nvim' " port of nord vim with added support
+Plug 'shaunsingh/nord.nvim' " port of nord vim with added support, only using for tree-sitter, should fork or something
 " Plug 'ChristianChiarulli/nvcode-color-schemes.vim' " has tree-sitter support for Nord
 Plug 'gruvbox-community/gruvbox'
 Plug 'airblade/vim-gitgutter'
@@ -30,12 +30,15 @@ Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 " Plug 'hoob3rt/lualine.nvim'
-Plug 'shadmansaleh/lualine.nvim' " fork with bug fixes
+" Plug 'shadmansaleh/lualine.nvim' " fork with bug fixes
 Plug 'ryanoasis/vim-devicons'
-Plug 'nvim-lua/plenary.nvim' " needed to fix a bug in lualine
+" Plug 'nvim-lua/plenary.nvim' " needed to fix a bug in lualine
 
 
 " utility
+Plug 'vim-scripts/restore_view.vim'
+Plug 'lambdalisue/fern.vim' " netwr alternative
+Plug 'lambdalisue/fern-hijack.vim'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-startify'
 " Plug 'pseewald/vim-anyfold'
@@ -43,8 +46,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar' " there's an issue with netwr and TS files
+Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'unblevable/quick-scope'
+" Plug 'ibhagwan/fzf-lua' " telescope like, built on fzf
 if isdirectory('/usr/local/opt/fzf')
 	Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
   Plug 'jremmen/vim-ripgrep'
@@ -54,7 +59,8 @@ endif
 call plug#end()
 
 " etc
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " am I
+" ever going to use this?
 
 " todo
 " Plug 'junegunn/vim-emoji'
@@ -74,21 +80,33 @@ let g:indentLine_concealcursor = 0
 let g:indentLine_char_list = ['⎸', '¦']
 let g:indentLine_faster = 1
 
-lua <<EOF
-require("plenary.reload").reload_module("lualine", true)
-require'lualine'.setup {
-  options = {
-    theme = 'nord',
-  },
-}
-EOF
+" lua <<EOF
+" require("plenary.reload").reload_module("lualine", true)
+" require'lualine'.setup {
+"   options = {
+"     theme = 'nord',
+"     sections = {
+"       lualine_b = {'branch'}
+"     },
+"     inactive_section = {
+"       lualine_a = {},
+"       lualine_b = {},
+"       lualine_c = {},
+"       lualine_x = {},
+"       lualine_y = {},
+"       lualine_z = {}
+"     }
+"   }
+" }
+" EOF
 
 "*****************************************************************************
 "" javascript
 "*****************************************************************************
 
 " Set it up so that Prettier runs on save for .js .jsx and .ts files
-" Bug causes remander of file being linted to delete and save
+" Bug causes remander of file being linted to delete and save, not sure what's
+" wrong
 " augroup AutomaticPrettier
 "   autocmd!
 "   autocmd BufWritePre,FileWritePre,FileAppendPre *.js :Prettier
@@ -115,11 +133,13 @@ noremap <leader>gc :GCheckout<CR>
 " set foldlevel=1
 " filetype plugin indent on
 
-augroup remember_folds
-  autocmd!
-  au BufWinLeave ?* mkview 1
-  au BufWinEnter ?* silent! loadview 1
-augroup END
+" augroup remember_folds
+"   autocmd!
+"   au BufWinLeave ?* mkview 1
+"   au BufWinEnter ?* silent! loadview 1
+" augroup END
+"
+set viewoptions=cursor,folds,slash,unix
 
 " fzf.vim
 nnoremap <silent> <C-p> :FZF<CR>
@@ -155,8 +175,8 @@ endfunction
 
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
-"vim-vinegar
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+"vim-vinegar, not using due to bug with TS
+" let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 " treesitter
 set foldmethod=expr

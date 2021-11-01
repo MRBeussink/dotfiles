@@ -1,5 +1,18 @@
 [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
+# clean up ~
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+
+export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+source $(brew --prefix nvm)/nvm.sh
+
+# Setting PATH for Python 3.8
+# The original version is saved in .zprofile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.8/bin:${PATH}"
+export PATH
+
 # Luke's config for the Zoomer Shell
 
 # Enable colors and change prompt:
@@ -69,16 +82,14 @@ lfcd () {
     fi
 }
 bindkey -s '^o' 'lfcd\n'
-
 bindkey -s '^a' 'bc -l\n'
-
 bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
-
 bindkey '^[[P' delete-char
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
 
 # starship.rs prompt
 eval "$(starship init zsh)"
